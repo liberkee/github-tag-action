@@ -3,27 +3,16 @@
 # config
 default_semvar_bump=${DEFAULT_BUMP:-minor}
 with_v=${WITH_V:-false}
-release_branches=${RELEASE_BRANCHES:-master}
 custom_tag=${CUSTOM_TAG}
 source=${SOURCE:-.}
 dryrun=${DRY_RUN:-false}
 initial_version=${INITIAL_VERSION:-0.0.0}
 tag_context=${TAG_CONTEXT:-repo}
+pre_release=${PRE_RELEASE}
 
 cd ${GITHUB_WORKSPACE}/${source}
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
-
-pre_release="true"
-IFS=',' read -ra branch <<< "$release_branches"
-for b in "${branch[@]}"; do
-    echo "Is $b a match for ${current_branch}"
-    if [[ "${current_branch}" =~ $b ]]
-    then
-        pre_release="false"
-    fi
-done
-echo "pre_release = $pre_release"
 
 # fetch tags
 git fetch --tags
