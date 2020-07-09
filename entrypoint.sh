@@ -111,16 +111,9 @@ if $dryrun
 then
     echo ::set-output name=tag::$tag
     exit 0
-fi 
+fi
 
 echo ::set-output name=tag::$new
-
-
-if $pre_release
-then
-    echo "This branch is not a release branch. Skipping the tag creation."
-    exit 0
-fi
 
 # push new tag ref to github
 dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
