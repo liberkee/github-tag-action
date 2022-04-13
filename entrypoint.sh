@@ -1,5 +1,10 @@
 #!/bin/bash
 
+### WORKAROUND for: https://github.com/actions/checkout/issues/760
+export GIT_CEILING_DIRECTORIES="/github/workspace"
+git config --global --add safe.directory /github/workspace
+###
+
 # config
 default_semvar_bump=${DEFAULT_BUMP:-minor}
 with_v=${WITH_V:-false}
